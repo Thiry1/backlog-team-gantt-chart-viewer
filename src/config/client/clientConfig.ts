@@ -8,6 +8,6 @@ export interface ClientConfig {
   };
 }
 
-export const serverConfig: ClientConfig = {
+export const clientConfig: ClientConfig = {
   application: require("config").get("application")
 };
