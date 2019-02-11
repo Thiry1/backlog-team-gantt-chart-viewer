@@ -8,7 +8,7 @@ module.exports = {
         }),
     ],
     entry: {
-        index: path.join(__dirname, "src/browser.tsx"),
+        index: ["@babel/polyfill", path.join(__dirname, "src/browser.tsx")],
     },
     output: {
         path: path.join(__dirname, "dist"),
