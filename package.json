@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Thiry1/nintendo-e-shop-view-clone.git"
+    "url": "git+https://github.com/Thiry1/backlog-team-gantt-chart-viewer.git"
   },
   "author": "kei-sakamoto",
   "license": "WTFPL",
   "bugs": {
-    "url": "https://github.com/Thiry1/nintendo-e-shop-view-clone/issues"
+    "url": "https://github.com/Thiry1/backlog-team-gantt-chart-viewer/issues"
   },
-  "homepage": "https://github.com/Thiry1/nintendo-e-shop-view-clone#readme",
+  "homepage": "https://github.com/Thiry1/backlog-team-gantt-chart-viewer#readme",
   "pre-commit": [
     "lint-staged"
   ],
