@@ -1,6 +1,12 @@
+const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
+    plugins: [
+        new webpack.DefinePlugin({
+            "buildEnv": JSON.stringify("browser"),
+        }),
+    ],
     entry: {
         index: path.join(__dirname, "src/index.ts"),
     },

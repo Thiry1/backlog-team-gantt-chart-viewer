@@ -1,0 +1,9 @@
+{
+  "application": {
+    "baseUrl": "http://localhost:3000/"
+  },
+  "backlog": {
+    "apiBaseUrl": "http://example.backlog.com/",
+    "apiKey": ""
+  }
+}

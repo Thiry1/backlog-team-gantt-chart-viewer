@@ -1,12 +1,14 @@
 {
-  "name": "nintendo-e-shop-view-clone",
+  "name": "backlog-team-grantt-chat-viewer",
   "version": "0.0.1",
   "description": "",
   "main": "dest/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": " npm run clean",
-    "build": "webpack --mode production",
+    "build:server": "tsc",
+    "build:client": "webpack --mode production",
+    "build": "npm run build:server && npm run build:client",
     "clean": "rimraf \"./dest/**/*\"",
     "lint": "tslint --fix -c ./tslint.json -t verbose \"./src/**/*.ts*\"",
     "lint:check:conflict": "tslint-config-prettier-check ./tslint.json",
@@ -58,6 +60,8 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "config": "^3.0.1",
     "react": "^16.7.0"
   }
 }

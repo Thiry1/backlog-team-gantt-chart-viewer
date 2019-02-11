@@ -8,7 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
-    "outDir": "dest",
+    "outDir": "build",
     "newLine": "LF"
   },
   "exclude": [
