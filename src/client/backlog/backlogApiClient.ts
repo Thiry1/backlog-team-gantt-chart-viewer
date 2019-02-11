@@ -14,14 +14,13 @@ export class BacklogApiClient {
    */
   public fetchGroups = async (): Promise<Group[]> => {
     try {
-      console.log(`${this.baseEndPoint}/groups`);
       const response: AxiosResponse<GroupsApiResponse> = await this.axios.get(
         `${this.baseEndPoint}/groups`,
         {
           params: {
-            apiKey: this.apiKey
-          }
-        }
+            apiKey: this.apiKey,
+          },
+        },
       );
       return response.data;
     } catch (error) {

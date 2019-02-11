@@ -1,7 +1,10 @@
 {
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
-    "prettier": true,
+    "prettier": [
+      true,
+      { "trailingComma": "all" }
+    ],
     "no-console": false,
     "no-var-requires": false,
     "interface-name": false

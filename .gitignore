@@ -93,3 +93,5 @@ build/
 package-lock.json
 
 config/prod.json
+
+dist

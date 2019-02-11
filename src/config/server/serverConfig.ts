@@ -1,11 +1,4 @@
 export interface ServerConfig {
-  application: {
-    /**
-     * アプリケーションのベース URL.
-     * ブラウザサイドでの API エンドポイントとして使う.
-     */
-    baseUrl: string;
-  };
   backlog: {
     /**
      * API のベース URL.

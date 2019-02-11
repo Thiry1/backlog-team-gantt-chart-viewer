@@ -8,18 +8,14 @@ module.exports = {
         }),
     ],
     entry: {
-        index: path.join(__dirname, "src/index.ts"),
+        index: path.join(__dirname, "src/browser.tsx"),
     },
     output: {
-        path: path.join(__dirname, "dest"),
-        filename: "[name].js",
+        path: path.join(__dirname, "dist"),
+        filename: "bundle.js",
     },
     resolve: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".scss"],
-    },
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM",
     },
     module: {
         rules: [

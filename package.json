@@ -2,18 +2,21 @@
   "name": "backlog-team-grantt-chat-viewer",
   "version": "0.0.1",
   "description": "",
-  "main": "dest/index.js",
+  "main": "build/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": " npm run clean",
     "build:server": "tsc",
     "build:client": "webpack --mode production",
     "build": "npm run build:server && npm run build:client",
-    "clean": "rimraf \"./dest/**/*\"",
+    "clean": "rimraf \"./dist/**/*\"",
     "lint": "tslint --fix -c ./tslint.json -t verbose \"./src/**/*.ts*\"",
     "lint:check:conflict": "tslint-config-prettier-check ./tslint.json",
     "lint-staged": "lint-staged",
-    "start": "start-storybook -s ./src/resources -p 3000"
+    "debug": "npm run build && npm run start:prod",
+    "start": "node ./build/server.js",
+    "start:prod": "HOST=prod node ./build/server.js",
+    "start:storybook": "start-storybook -s ./src/resources -p 3000"
   },
   "repository": {
     "type": "git",
@@ -39,7 +42,11 @@
     "@storybook/addon-knobs": "^4.1.7",
     "@storybook/addons": "^4.1.7",
     "@storybook/react": "^4.1.7",
-    "@types/react": "^16.7.20",
+    "@types/express": "^4.16.1",
+    "@types/react": "^16.8.2",
+    "@types/react-dom": "^16.8.0",
+    "@types/react-redux": "^7.0.1",
+    "@types/redux-actions": "^2.3.1",
     "@types/storybook__react": "^4.0.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
@@ -60,8 +67,19 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
+    "@types/history": "^4.7.2",
     "axios": "^0.18.0",
     "config": "^3.0.1",
-    "react": "^16.7.0"
+    "connected-react-router": "^6.3.0",
+    "express": "^4.16.4",
+    "history": "^4.7.2",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0",
+    "react-router": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.4",
+    "redux-react-hook": "^3.1.0",
+    "redux-saga": "^1.0.1"
   }
 }

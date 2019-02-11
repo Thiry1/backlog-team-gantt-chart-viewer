@@ -7,9 +7,9 @@ export class BacklogService {
   constructor(args: { apiBaseUrl: string; apiKey?: string }) {
     this.client = new BacklogApiClient(
       axios.create({
-        baseURL: args.apiBaseUrl
+        baseURL: args.apiBaseUrl,
       }),
-      args.apiKey
+      args.apiKey,
     );
   }
 
