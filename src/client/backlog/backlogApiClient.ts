@@ -5,7 +5,6 @@ import { Group, GroupsApiResponse } from "./types";
  * backlog の API クライアント
  */
 export class BacklogApiClient {
-  private baseEndPoint = "/api/v2";
   constructor(private axios: AxiosInstance, private apiKey?: string) {}
 
   /**
@@ -15,7 +14,7 @@ export class BacklogApiClient {
   public fetchGroups = async (): Promise<Group[]> => {
     try {
       const response: AxiosResponse<GroupsApiResponse> = await this.axios.get(
-        `${this.baseEndPoint}/groups`,
+        `/groups`,
         {
           params: {
             apiKey: this.apiKey,

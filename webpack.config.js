@@ -1,11 +1,13 @@
 const webpack = require("webpack");
 const path = require("path");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             "buildEnv": JSON.stringify("browser"),
         }),
+        new webpack.IgnorePlugin(/server/)
     ],
     entry: {
         index: ["@babel/polyfill", path.join(__dirname, "src/browser.tsx")],
@@ -17,6 +19,9 @@ module.exports = {
     resolve: {
         extensions: [".js", ".jsx", ".ts", ".tsx", ".scss"],
     },
+    // optimization: {
+    //     minimizer: [new UglifyJsPlugin()],
+    // },
     module: {
         rules: [
             {
