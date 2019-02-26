@@ -68,3 +68,11 @@ export interface Group {
  * @see https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-list-of-groups/
  */
 export type GroupsApiResponse = Group[];
+
+export interface Issue {}
+
+/**
+ * 課題一覧取得 API のレスポンス.
+ * @see https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-issue-list/
+ */
+export type IssueApiResponse = Issue[];

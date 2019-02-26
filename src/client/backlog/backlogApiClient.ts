@@ -28,4 +28,6 @@ export class BacklogApiClient {
       throw error;
     }
   };
+
+  public fetchIssues = async (): Promise<Issue[]> => {};
 }

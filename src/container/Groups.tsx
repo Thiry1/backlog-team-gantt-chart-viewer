@@ -4,6 +4,7 @@ import { compose } from "recompose";
 import { Group } from "../client/backlog/types";
 import { State } from "../redux/modules";
 import { initializeGroupsPage } from "../redux/modules/actions";
+import * as Views from "../views";
 interface PropsFromState {
   groups: Group[];
 }
@@ -17,7 +18,12 @@ class Component extends React.Component<Props> {
   }
 
   public render(): JSX.Element {
-    return <div>{JSON.stringify(this.props)}</div>;
+    const props: Views.GroupsProps = {
+      groupList: {
+        groups: this.props.groups,
+      },
+    };
+    return <Views.Groups {...props} />;
   }
 }
 // const Component = (props: Props): JSX.Element => {
