@@ -1,3 +1,2 @@
-nintendo-e-shop-view-clone
+backlog-team-gantt-chart-viewer
 ===
-Nintendo Switch の e-shop の react view クローン.
