@@ -14,7 +14,7 @@
     "lint:check:conflict": "tslint-config-prettier-check ./tslint.json",
     "lint-staged": "lint-staged",
     "debug": "npm run build && npm run start:prod",
-    "start": "node ./build/server.js",
+    "start": "echo not implemented && exit 1",
     "start:prod": "HOST=prod node ./build/server.js",
     "start:storybook": "start-storybook -s ./src/resources -p 3000"
   },

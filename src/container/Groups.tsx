@@ -2,9 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import { Group } from "../client/backlog/types";
+import * as Views from "../components";
 import { State } from "../redux/modules";
 import { initializeGroupsPage } from "../redux/modules/actions";
-import * as Views from "../views";
 interface PropsFromState {
   groups: Group[];
 }
