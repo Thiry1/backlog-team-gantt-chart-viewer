@@ -1,5 +1,5 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { Group, GroupsApiResponse } from "./types";
+import { Group, GroupsApiResponse, Issue } from "./types";
 
 /**
  * backlog の API クライアント
@@ -29,5 +29,7 @@ export class BacklogApiClient {
     }
   };
 
-  public fetchIssues = async (): Promise<Issue[]> => {};
+  public fetchIssues = async (): Promise<Issue[]> => {
+    return [] as Issue[]; // TODO: implement
+  };
 }

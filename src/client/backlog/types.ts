@@ -1,3 +1,4 @@
+type TODO = any;
 /**
  * ユーザー情報
  */
@@ -69,7 +70,101 @@ export interface Group {
  */
 export type GroupsApiResponse = Group[];
 
-export interface Issue {}
+export interface Issue {
+  /**
+   * 課題の ID.
+   */
+  id: number;
+  /**
+   * プロジェクトの ID.
+   */
+  projectId: number;
+  /**
+   * 課題のキー.
+   * @example "BLG-1"
+   */
+  issueKey: string;
+  /**
+   * 課題のタイプ.
+   */
+  issueType: {
+    id: number;
+    projectId: number;
+    name: string;
+    color: string;
+    displayOrder: number;
+  };
+  /**
+   * サマリー.
+   */
+  summary: string;
+  /**
+   * 説明.
+   */
+  description: string;
+  /**
+   * 謎/
+   */
+  resolutions: TODO;
+  /**
+   * 重要度.
+   */
+  priority: {
+    id: string | null;
+    /**
+     * @example "中"
+     */
+    name: string;
+  };
+  /**
+   * 課題のステータス.
+   */
+  status: {
+    /**
+     * @example "In Progress"
+     */
+    name: string;
+    id: number;
+  };
+  /**
+   * 課題の assignee.
+   */
+  assignee: {
+    id: number;
+    name: string;
+    roleType: number;
+    lang: string | null;
+    mailAddress: string;
+  };
+  /**
+   * カテゴリー.
+   */
+  category: any[];
+  /**
+   * バージョン.
+   */
+  versions: any[];
+  /**
+   * マイルストーン.
+   */
+  milestone: any[];
+  /**
+   * 開始日時.
+   */
+  startDate: string | null;
+  /**
+   * 期日.
+   */
+  dueDate: string | null;
+  /**
+   * 予定時間.
+   */
+  estimatedHours: string | null;
+  /**
+   * 実績時間.
+   */
+  actualHours: string | null;
+}
 
 /**
  * 課題一覧取得 API のレスポンス.
