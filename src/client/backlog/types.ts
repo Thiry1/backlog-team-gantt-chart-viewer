@@ -70,6 +70,59 @@ export interface Group {
  */
 export type GroupsApiResponse = Group[];
 
+/**
+ * 課題取得 API のリクエストパラメーター
+ */
+export interface IssuesApiRequestParams {
+  projectId?: number[];
+  issueTypeId?: number[];
+  categoryId?: number[];
+  versionId?: number[];
+  milestoneId?: number[];
+  statusId?: Array<1 | 2 | 3 | 4>;
+  priorityId?: number[];
+  assigneeId?: number[];
+  createdUserId?: number[];
+  resolutionId?: number[];
+  parentChild?: Array<0 | 1 | 2 | 3 | 4>;
+  attachment?: boolean;
+  sharedFile?: boolean;
+  sort?:
+    | "issueType"
+    | "category"
+    | "version"
+    | "milestone"
+    | "summary"
+    | "status"
+    | "priority"
+    | "attachment"
+    | "sharedFile"
+    | "created"
+    | "createdUser"
+    | "updated"
+    | "updatedUser"
+    | "assignee"
+    | "startDate"
+    | "dueDate"
+    | "estimatedHours"
+    | "actualHours"
+    | "childIssue";
+  order?: "asc" | "desc";
+  offset?: number;
+  count?: number;
+  createdSince?: string;
+  createdUntil?: string;
+  updatedSince?: string;
+  updatedUntil?: string;
+  startDateSince?: string;
+  startDateUntil?: string;
+  dueDateSince?: string;
+  dueDateUntil?: string;
+  id?: number[];
+  parentIssueId?: number[];
+  keyword?: string;
+}
+
 export interface Issue {
   /**
    * 課題の ID.
@@ -164,10 +217,11 @@ export interface Issue {
    * 実績時間.
    */
   actualHours: string | null;
+  // TODO: すべての要素を並べる
 }
 
 /**
  * 課題一覧取得 API のレスポンス.
  * @see https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-issue-list/
  */
-export type IssueApiResponse = Issue[];
+export type IssuesApiResponse = Issue[];

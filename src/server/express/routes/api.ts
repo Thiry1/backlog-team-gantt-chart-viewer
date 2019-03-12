@@ -12,3 +12,16 @@ apiRouter.get(
     }
   },
 );
+
+apiRouter.get(
+  "/api/issues",
+  async (req: express.Request, res: express.Response) => {
+    try {
+      res.json(await backlogService.fetchIssues(req.query));
+    } catch (e) {
+      res
+        .status(500)
+        .json({ message: e.message, params: req.params, query: req.query });
+    }
+  },
+);

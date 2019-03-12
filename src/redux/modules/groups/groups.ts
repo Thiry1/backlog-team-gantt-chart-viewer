@@ -2,12 +2,13 @@ import { Action, handleActions } from "redux-actions";
 import { SagaIterator } from "redux-saga";
 import { all, call, put, select, takeLatest } from "redux-saga/effects";
 import { Group } from "../../../client/backlog/types";
-import { createAction } from "../../../util/createAction";
-import { INITIALIZE_GROUPS_PAGE } from "../actions";
+import {
+  FETCH_GROUPS,
+  INITIALIZE_GROUPS_PAGE,
+  SET_GROUPS,
+  setGroups,
+} from "../actions";
 import { State } from "../index";
-
-export const SET_GROUPS = "btgcv/SET_GROUPS";
-export const setGroups = createAction<Group[]>(SET_GROUPS);
 
 export interface GroupsState {
   groups: Group[];
@@ -40,5 +41,7 @@ export const reducer = handleActions<GroupsState, any>(
 );
 
 export function* rootSaga(): SagaIterator {
-  yield all([takeLatest(INITIALIZE_GROUPS_PAGE, runFetchGroups)]);
+  yield all([
+    takeLatest([INITIALIZE_GROUPS_PAGE, FETCH_GROUPS], runFetchGroups),
+  ]);
 }

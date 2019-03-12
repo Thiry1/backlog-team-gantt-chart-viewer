@@ -1,6 +1,12 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from "axios";
-import { Group, GroupsApiResponse, Issue } from "./types";
-
+import * as qs from "query-string";
+import {
+  Group,
+  GroupsApiResponse,
+  Issue,
+  IssuesApiRequestParams,
+  IssuesApiResponse,
+} from "./types";
 /**
  * backlog の API クライアント
  */
@@ -12,7 +18,7 @@ export class BacklogApiClient {
    * @see https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-list-of-groups/
    */
   public fetchGroups = async (): Promise<Group[]> => {
-    try {
+    return this.fetch(async () => {
       const response: AxiosResponse<GroupsApiResponse> = await this.axios.get(
         `/groups`,
         {
@@ -22,14 +28,39 @@ export class BacklogApiClient {
         },
       );
       return response.data;
+    });
+  };
+
+  /**
+   * 課題一覧を取得する.
+   * @param fetchIssuesParams
+   */
+  public fetchIssues = async (
+    fetchIssuesParams: IssuesApiRequestParams,
+  ): Promise<Issue[]> => {
+    return this.fetch(async () => {
+      const response: AxiosResponse<IssuesApiResponse> = await this.axios.get(
+        `/issues`,
+        {
+          params: {
+            apiKey: this.apiKey,
+            ...fetchIssuesParams,
+          },
+          paramsSerializer: (params: IssuesApiRequestParams) =>
+            qs.stringify(params, { arrayFormat: "bracket" }),
+        },
+      );
+      return response.data;
+    });
+  };
+
+  private fetch = async <T>(fetchFunction: () => Promise<T>): Promise<T> => {
+    try {
+      return fetchFunction();
     } catch (error) {
       console.log("ERROR", (error as AxiosError).code);
       // TODO: implement
       throw error;
     }
-  };
-
-  public fetchIssues = async (): Promise<Issue[]> => {
-    return [] as Issue[]; // TODO: implement
   };
 }

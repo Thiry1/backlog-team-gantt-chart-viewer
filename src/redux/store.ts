@@ -1,3 +1,4 @@
+import { routerMiddleware } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import {
   applyMiddleware,
@@ -8,16 +9,20 @@ import {
 } from "redux";
 import createSagaMiddleware, { END, Task } from "redux-saga";
 import { createRootReducer } from "./modules/";
-
+declare const window: any;
 const sagaMiddleware = createSagaMiddleware();
 
 export const history = createBrowserHistory();
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const createStore = (...middlewares: Middleware[]): SagaStore => {
   const reduxStore = store(
     createRootReducer(history),
     undefined,
-    compose(applyMiddleware(...[...middlewares, sagaMiddleware])),
+    composeEnhancers(
+      applyMiddleware(
+        ...[routerMiddleware(history), ...middlewares, sagaMiddleware],
+      ),
+    ),
   );
   return {
     close: () => reduxStore.dispatch(END),
