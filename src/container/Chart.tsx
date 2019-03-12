@@ -25,6 +25,16 @@ class Component extends React.Component<Props> {
   }
 
   public render(): JSX.Element {
+    // TODO: suspense
+    if (this.props.groupIssues.loading) {
+      return (
+        <p>
+          読み込み中
+          <br />
+          グループに所属しているメンバー数に比例して時間がかかります
+        </p>
+      );
+    }
     return <div>{JSON.stringify(this.props)}</div>;
   }
 }

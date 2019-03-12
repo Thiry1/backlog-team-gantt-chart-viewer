@@ -1,12 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { compose } from "recompose";
-import { Group } from "../client/backlog/types";
 import * as Views from "../components";
 import { State } from "../redux/modules";
 import { initializeGroupsPage } from "../redux/modules/actions";
+import { GroupsState } from "../redux/modules/groups/groups";
 interface PropsFromState {
-  groups: Group[];
+  groups: GroupsState;
 }
 interface Dispatcher {
   initializeGroupsPage: () => void;
@@ -18,9 +18,14 @@ class Component extends React.Component<Props> {
   }
 
   public render(): JSX.Element {
+    // TODO: suspense
+    if (this.props.groups.loading) {
+      return <p>グループ一覧読み込み中</p>;
+    }
+
     const props: Views.GroupsProps = {
       groupList: {
-        groups: this.props.groups,
+        groups: this.props.groups.groups,
       },
     };
     return <Views.Groups {...props} />;
@@ -36,7 +41,7 @@ class Component extends React.Component<Props> {
 const mapStateToProps = (state: State): PropsFromState => {
   console.log("state", state);
   return {
-    groups: state.groups.groups,
+    groups: state.groups,
   };
 };
 export const Groups = compose(

@@ -13,15 +13,24 @@ import { State } from "../index";
 
 export const SET_GROUP_ISSUES = "btgcv/SET_GROUP_ISSUES";
 export const setGroupIssues = createAction<GroupIssuesState>(SET_GROUP_ISSUES);
+export const SET_LOADING = "btgcv/groupIssues/SET_LOADING";
+export const setLoading = createAction<boolean>(SET_LOADING);
 
 export interface GroupIssuesState {
-  [groupId: number]: Issue[];
+  groupIssues: {
+    [groupId: number]: Issue[];
+  };
+  loading: boolean;
 }
 
-const initialState: GroupIssuesState = {};
+const initialState: GroupIssuesState = {
+  groupIssues: {},
+  loading: false,
+};
 
 export function* runFetchGroupIssues(action: Action<number>): SagaIterator {
   try {
+    yield put(setLoading(true));
     const backlogService = yield select(
       (state: State) => state.service.backlogService,
     );
@@ -55,12 +64,16 @@ export function* runFetchGroupIssues(action: Action<number>): SagaIterator {
     }
     yield put(
       setGroupIssues({
-        ...userIssues,
-        ...(yield select((state: State) => state.groupIssues)),
+        groupIssues: {
+          ...userIssues,
+          ...(yield select((state: State) => state.groupIssues.groupIssues)),
+        },
+        loading: false,
       }),
     );
   } catch (e) {
     console.error("failed to fetch group issues", e);
+    yield put(setGroupIssues(initialState));
   }
 }
 
@@ -68,6 +81,10 @@ export const reducer = handleActions<GroupIssuesState, any>(
   {
     [SET_GROUP_ISSUES]: (state, action: Action<GroupIssuesState>) =>
       action.payload,
+    [SET_LOADING]: (state, action: Action<boolean>) => ({
+      ...state,
+      loading: action.payload,
+    }),
   },
   initialState,
 );
