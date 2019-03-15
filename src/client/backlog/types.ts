@@ -192,15 +192,15 @@ export interface Issue {
   /**
    * カテゴリー.
    */
-  category: any[];
+  category: TODO[];
   /**
    * バージョン.
    */
-  versions: any[];
+  versions: TODO[];
   /**
    * マイルストーン.
    */
-  milestone: any[];
+  milestone: TODO[];
   /**
    * 開始日時.
    */
@@ -225,3 +225,48 @@ export interface Issue {
  * @see https://developer.nulab-inc.com/ja/docs/backlog/api/2/get-issue-list/
  */
 export type IssuesApiResponse = Issue[];
+
+/**
+ * スペース情報取得 API のレスポンス.
+ * @see https://developer.nulab.com/ja/docs/backlog/api/2/get-space/
+ */
+export interface SpaceApiResponse {
+  /**
+   * スペースキー.
+   */
+  spaceKey: string;
+  /**
+   * スペース名.
+   */
+  name: string;
+  /**
+   *
+   */
+  ownerId: number;
+  /**
+   * 言語
+   * @example ja
+   */
+  lang: string;
+  /**
+   * タイムゾーン.
+   * @example Asia/Tokyo
+   */
+  timezone: string;
+  /**
+   * @example 08:00:00
+   */
+  reportSendTime: string;
+  /**
+   * @example markdown
+   */
+  textFormattingRule: string;
+  /**
+   * @example 2008-07-06T15:00:00Z
+   */
+  created: string;
+  /**
+   * @example 2013-06-18T07:55:37Z
+   */
+  updated: string;
+}

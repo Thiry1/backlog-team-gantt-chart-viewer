@@ -1,6 +1,11 @@
 import axios from "axios";
 import { BacklogApiClient } from "../client/backlog/backlogApiClient";
-import { Group, Issue, IssuesApiRequestParams } from "../client/backlog/types";
+import {
+  Group,
+  Issue,
+  IssuesApiRequestParams,
+  SpaceApiResponse,
+} from "../client/backlog/types";
 
 export class BacklogService {
   private client: BacklogApiClient;
@@ -21,5 +26,9 @@ export class BacklogService {
     params: IssuesApiRequestParams,
   ): Promise<Issue[]> => {
     return this.client.fetchIssues(params);
+  };
+
+  public fetchSpace = async (): Promise<SpaceApiResponse> => {
+    return this.client.fetchSpace();
   };
 }

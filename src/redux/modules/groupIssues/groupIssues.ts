@@ -25,7 +25,7 @@ export interface GroupIssuesState {
 
 const initialState: GroupIssuesState = {
   groupIssues: {},
-  loading: false,
+  loading: true,
 };
 
 export function* runFetchGroupIssues(action: Action<number>): SagaIterator {
@@ -49,7 +49,7 @@ export function* runFetchGroupIssues(action: Action<number>): SagaIterator {
       return;
     }
 
-    let userIssues: { [groupId: number]: Issue[] } = {};
+    const groupIssues: Issue[] = [];
     // 課題取得 API は1リクエストで最大100件までしか取得できない.
     // ガントチャートを作成するのに十分なデータを取得するためにユーザーごとに API を叩く.
     for (const user of targetGroup.members) {
@@ -57,16 +57,13 @@ export function* runFetchGroupIssues(action: Action<number>): SagaIterator {
         assigneeId: [user.id],
       };
       const issues: Issue[] = yield call(backlogService.fetchIssues, params);
-      userIssues = {
-        [user.id]: issues,
-        ...userIssues,
-      };
+      groupIssues.push(...issues);
     }
     yield put(
       setGroupIssues({
         groupIssues: {
-          ...userIssues,
           ...(yield select((state: State) => state.groupIssues.groupIssues)),
+          [targetGroup.id]: groupIssues,
         },
         loading: false,
       }),

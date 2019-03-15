@@ -60,6 +60,18 @@ module.exports = {
                     },
                 ],
                 include: [path.join(__dirname, "./src/")],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: "style-loader",
+                    },
+                    {
+                        loader: "css-loader",
+                    },
+                ],
+                include: [path.join(__dirname, "./node_modules/")],
             }
         ],
     }

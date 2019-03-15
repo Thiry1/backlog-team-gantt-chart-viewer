@@ -21,7 +21,7 @@ export interface GroupsState {
 
 const initialState: GroupsState = {
   groups: [],
-  loading: false,
+  loading: true,
 };
 
 export function* runFetchGroups(): SagaIterator {

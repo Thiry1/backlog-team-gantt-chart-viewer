@@ -25,3 +25,16 @@ apiRouter.get(
     }
   },
 );
+
+apiRouter.get(
+  "/api/space",
+  async (req: express.Request, res: express.Response) => {
+    try {
+      res.json(await backlogService.fetchSpace());
+    } catch (e) {
+      res
+        .status(500)
+        .json({ message: e.message, params: req.params, query: req.query });
+    }
+  },
+);

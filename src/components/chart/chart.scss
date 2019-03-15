@@ -1,0 +1,6 @@
+.chart {
+  > [class*="react-calendar-timeline"] {
+    color: #f00;
+  }
+  //@import "~react-calendar-timeline/lib/Timeline.css";
+}

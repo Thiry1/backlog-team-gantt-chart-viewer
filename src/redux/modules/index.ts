@@ -6,11 +6,13 @@ import { all, fork } from "redux-saga/effects";
 import * as groupIssues from "./groupIssues/groupIssues";
 import * as groups from "./groups/groups";
 import * as service from "./service/service";
+import * as space from "./space/space";
 
 export interface State {
   groups: groups.GroupsState;
   groupIssues: groupIssues.GroupIssuesState;
   service: service.ServiceState;
+  space: space.SpaceState;
 }
 
 export const createRootReducer = (history: History) =>
@@ -19,6 +21,7 @@ export const createRootReducer = (history: History) =>
     groups: groups.reducer,
     groupIssues: groupIssues.reducer,
     service: service.reducer,
+    space: space.reducer,
   });
 
 export function* rootSaga(): SagaIterator {
@@ -26,5 +29,6 @@ export function* rootSaga(): SagaIterator {
     fork(groups.rootSaga),
     fork(service.rootSaga),
     fork(groupIssues.rootSaga),
+    fork(space.rootSaga),
   ]);
 }
