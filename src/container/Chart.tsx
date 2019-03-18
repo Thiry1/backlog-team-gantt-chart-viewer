@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "recompose";
 import { Issue } from "../client/backlog/types";
-import { Chart as ChartView, ChartProps } from "../components/chart/chart";
+import * as Views from "../components/";
+import { TimelineProps } from "../components/atoms/timeline/timeline";
 import { State } from "../redux/modules";
 import { initializeChartPage } from "../redux/modules/actions";
 import { GroupIssuesState } from "../redux/modules/groupIssues/groupIssues";
 import { SpaceState } from "../redux/modules/space/space";
+
 interface PropsFromState {
   groupIssues: GroupIssuesState;
   space: SpaceState;
@@ -45,17 +47,16 @@ class Component extends React.Component<Props> {
         parseInt(this.props.match.params.id, 10)
       ],
     );
-    // return <div>{JSON.stringify(this.props)}</div>;
-    console.log(props);
-    return <ChartView {...props} />;
+
+    return <Views.Chart {...props} />;
   }
 
-  private createChartProps = (issues: Issue[]): ChartProps | null => {
+  private createChartProps = (issues: Issue[]): Views.ChartProps | null => {
     if (!issues || issues.length === 0) {
       return null;
     }
-    const groups: ChartProps["groups"] = [];
-    const items: ChartProps["items"] = [];
+    const groups: TimelineProps["groups"] = [];
+    const items: TimelineProps["items"] = [];
     issues.forEach(issue => {
       const isGroupRegistered = groups.some(
         group => group.id === issue.assignee.id,
@@ -77,29 +78,32 @@ class Component extends React.Component<Props> {
       });
     });
     return {
-      groups,
-      items,
-      defaultTimeStart: moment().startOf("day"),
-      defaultTimeEnd: moment()
-        .endOf("day")
-        .add("1", "months"),
-      canMove: false,
-      canChangeGroup: false,
-      dragSnap: 3600 * 24 * 1000,
-      itemTouchSendsClick: true,
-      onItemClick: (itemId: number) => {
-        const target = issues.find(issue => issue.id === itemId);
-        window.open(
-          `${this.props.space.spaceUrl}view/${target.issueKey}`,
-          "_blank",
-        );
+      timeline: {
+        groups,
+        items,
+        defaultTimeStart: moment().startOf("day"),
+        defaultTimeEnd: moment()
+          .endOf("day")
+          .add("1", "months"),
+        canMove: false,
+        canChangeGroup: false,
+        dragSnap: 3600 * 24 * 1000,
+        itemTouchSendsClick: true,
+        onItemClick: (itemId: number) => {
+          const target = issues.find(issue => issue.id === itemId);
+          if (target) {
+            window.open(
+              `${this.props.space.spaceUrl}view/${target.issueKey}`,
+              "_blank",
+            );
+          }
+        },
       },
     };
   };
 }
 
 const mapStateToProps = (state: State): PropsFromState => {
-  console.log("state", state);
   return {
     groupIssues: state.groupIssues,
     space: state.space,

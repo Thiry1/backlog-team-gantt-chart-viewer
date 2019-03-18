@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 import { MemoryRouter as Router } from "react-router-dom";
-import { Group } from "../../client/backlog/types";
+import { Group } from "../../../client/backlog/types";
 import { GroupList, GroupListProps } from "./groupList";
 const props: GroupListProps = {
   groups: [

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GroupList, GroupListProps } from "../groupList/groupList";
+import { GroupList, GroupListProps } from "../../molecules/groupList/groupList";
 
 export interface GroupsProps {
   groupList: GroupListProps;

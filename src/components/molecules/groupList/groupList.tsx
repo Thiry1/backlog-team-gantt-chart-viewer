@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { Group } from "../../client/backlog/types";
+import { Group } from "../../../client/backlog/types";
 const classNames = require("./groupList.scss");
 
 export interface GroupListProps {

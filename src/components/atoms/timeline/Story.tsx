@@ -1,11 +1,9 @@
 import { storiesOf } from "@storybook/react";
 import * as moment from "moment";
 import * as React from "react";
-import { MemoryRouter as Router } from "react-router";
-import { GroupList } from "../groupList/groupList";
-import { Chart, ChartProps } from "./chart";
+import { Timeline, TimelineProps } from "./timeline";
 
-const props: ChartProps = {
+const props: TimelineProps = {
   visibleTimeStart: moment(),
   visibleTimeEnd: moment().add("1", "months"),
   groups: [{ id: 1, title: "group 1" }, { id: 2, title: "group 2" }],
@@ -28,5 +26,5 @@ const props: ChartProps = {
 };
 
 storiesOf("チャート", module).add("チャートを表示できる", () => {
-  return <Chart {...props} />;
+  return <Timeline {...props} />;
 });
