@@ -65,8 +65,7 @@ class Component extends React.Component<Props> {
         groups.push({
           id: issue.assignee.id,
           title: issue.assignee.name,
-          stackItems: true,
-        } as any); // stackItems が型定義にない
+        });
       }
 
       items.push({
@@ -81,6 +80,7 @@ class Component extends React.Component<Props> {
       timeline: {
         groups,
         items,
+        stackItems: true,
         defaultTimeStart: moment().startOf("day"),
         defaultTimeEnd: moment()
           .endOf("day")
