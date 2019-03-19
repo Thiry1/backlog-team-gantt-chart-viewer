@@ -2,5 +2,10 @@
   "backlog": {
     "apiBaseUrl": "http://example.backlog.com/",
     "apiKey": ""
+  },
+  "basicAuth": {
+    "enabled": false,
+    "id": "id",
+    "password": "password"
   }
 }
